@@ -26,22 +26,26 @@
             <thead>
               <tr>
                 <th scope="col">번호</th>
+                <th scope="col">작성자</th>
                 <th scope="col">제목</th>
                 <th scope="col">내용</th>
-                <th scope="col">작성자</th>
+                <th scope="col">등록일</th>
+                
               </tr>
             </thead>
             <tbody>
               <tr th:each="board : ${boards}">
-                <td th:text="${board.id}">Mark</td>
-                <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}">Otto</a></td>
-                <td th:text="${board.content}">Otto</td>                
-                <td>나</td>
+                <td th:text="${board.questionBoardId}"/>
+                <td th:text="${board.memberName}">나</td>
+                <td><a th:text="${board.title}" th:href="@{/board/add(id=${board.questionBoardId})}"/></td>
+                <td th:text="${board.content}"/>
+                <td th:text="${board.regDtime}"/>                
+                
               </tr>
               </tbody>
           </table>
           <div class="text-right">
-            <a type="button" class="btn btn-primary" th:href="@{/board/form}">쓰기</a>
+            <a type="button" class="btn btn-primary" th:href="@{/board/add/{email}}">쓰기</a>
         </div>
         <!-- 
         <form th:action="@{'board/delete/board'}" method="post">

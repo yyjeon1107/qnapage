@@ -21,14 +21,14 @@
 
     <div class="container">
         <h2>게시판</h2>
-		<form action="#" th:action="@{/board/form}" th:object="${board}" method="post">
+		<form action="#" th:action="@{/board/add/{email}}" th:object="${boardDto}" method="post">
 		<div class="mb-3">
 		  <label for="title" class="form-label">제목</label>
-		  <input input type="text" th:field="*{title}">
+		  <input input type="text" name="title">
 		</div>
 		<div class="mb-3">
 		  <label for="content" class="form-label">내용</label>
-		  <textarea class="form-control" id="content" rows="3" th:field="*{content}"></textarea>
+		  <textarea class="form-control" id="content" rows="3" name="content"></textarea>
 		</div>		
 		
 		

@@ -1,95 +1,115 @@
 package com.qna.controller;
 
-import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.qna.dao.MemberMapper;
 import com.qna.domain.Member;
-import com.qna.dto.JoinForm;
+import com.qna.dto.JoinDto;
 import com.qna.service.MemberService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
 
-	@Autowired
-	private MemberService memberService;
-	
-	@Autowired
-	private MemberMapper memberMapper;
-	
-	
-	
-	//회원가입
-	@GetMapping("/join/member")
-	public String getJoin() {
-		return "member/joinmembers";
-	}
-	
-	@PostMapping("/join/member")
-	public String postJoin(HttpServletRequest request, Model model){
-	
-		String password = request.getParameter("password"); 
-		String name = request.getParameter("name"); 
-		String email = request.getParameter("email"); 
-		try {
-			Member member = new Member();
-			member.setPassword(password);
-			member.setName(name);
-			member.setEmail(email);
-			memberMapper.insert(member);
-			return "redirect:/";
-		}catch (Exception e) {
-			// TODO: handle exception
-			model.addAttribute("fail", "가입에 실패했습니다.");
-			return "member/joinmembers";
-		}
 
-	}
-	
-	
-	//로그인
-	@GetMapping("/join/login")
-	public String getLogin() {
-		return "member/login";
-	}
-	
-	@PostMapping("/join/login")
-	public String postLogin(HttpServletRequest request, JoinForm joinForm) {
+	    private final MemberService memberService;
+
+	   
+	    //회원가입
+	    @GetMapping("/join/member")
+	    public String joinMember() {
+	        return "member/joinmembers";
+	    }
+
+	    @PostMapping("/join/member")
+	    public String joinMember(HttpServletRequest request, @ModelAttribute Member member) {
+	        
+	    	HttpSession session = request.getSession();
+	    	
+	    	Member joinedMember = memberService.join(member);
+	    	if(joinedMember != null) {
+	    		session.setAttribute("message", "회원가입 성공");
+	    		return "redirect:/";
+	    	}else {
+	    		session.setAttribute("message", "회원가입 실패");
+				return "redirect:/member/joinmembers";
+
+	    	}
+	    
+	    }
+	    
+	    
+	    //로그인
+		@GetMapping("/join/login")
+		public String getLogin() {
+			return "member/login";
+		}
 		
 		
-        HttpSession session = request.getSession();
-		Member member = memberMapper.getByEmail(joinForm.getEmail());
-		if(member.getPassword().equals(joinForm.getPassword())) {
+		@PostMapping("/join/login")
+		public String postLogin(HttpServletRequest request, JoinDto joinDto) {
 			
+	    	HttpSession session = request.getSession();
+            Optional<Member> member = memberService.findByEmail(joinDto.getEmail());
+            if(member.get().getEmail().equals(joinDto.getEmail()) && member.get().getPassword().equals(joinDto.getPassword())) {
+                session.setAttribute("login", "logined");
+            	session.setAttribute("member", member);
+                session.setAttribute("message", "로그인 성공");
+                System.out.println("로그인 성공");
+                return "redirect:/";
+
+            }else {
+                System.out.println("로그인 실패");
+            	return "redirect:/member/login";
+            }
 		}
 		
 		
 		
-		return "member/login";
-	}
-	
-	
-	
-	
-	
-	//회원목록 불러오기
-	@GetMapping("/memberlist")
-	public String memberList(Model model) {
-		
+		//로그아웃
+		@GetMapping("/logout")
+		public String logout(HttpServletRequest request) {
+	        HttpSession session = request.getSession();
+	        session.setAttribute("login", null); 
+	        session.setAttribute("member", null);
+	        session.setAttribute("message", "로그아웃");        
+			return "redirect:/";
+		}
 
-		List<Member> memberList = memberService.getAll();
-		model.addAttribute("memberList", memberList);
 		
-		return "member/memberlist";
-	
-	}
+		//마이페이지
+		
+		
+		
+		
+		//회원정보 수정
+		
+		
+		
+		//회원탈퇴
+		
+		
+		
+//	    @GetMapping("/{itemId}/edit")
+//	    public String editForm(@PathVariable Long itemId, Model model) {
+//	        Item item = itemService.findById(itemId).get();
+//	        model.addAttribute("item", item);
+//	        return "editForm";
+//	    }
+//
+//	    @PostMapping("/{itemId}/edit")
+//	    public String edit(@PathVariable Long itemId, @ModelAttribute ItemUpdateDto updateParam) {
+//	        itemService.update(itemId, updateParam);
+//	        return "redirect:/items/{itemId}";
+//	    }
 }
