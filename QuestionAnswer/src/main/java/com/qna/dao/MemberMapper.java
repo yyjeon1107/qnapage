@@ -17,10 +17,10 @@ public interface MemberMapper {
 	
 	void update(@Param("id") int id, @Param("updateParam") MemberUpdateDto updateParam);
 	
-	Optional<Member> findByEmail(String email);
+	Member findByEmail(String email);
 	
 	List<Member> findAll();
 
-	Optional<Member> findById(int id);
+	Member findById(int id);
 	
 }

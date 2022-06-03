@@ -33,7 +33,7 @@ public class BoardController {
 	//게시판 글 작성
 	@GetMapping("/add/{email}")
 	public String getAddBoard(@PathVariable String email) {
-		Optional<Member> member = memberService.findByEmail(email);
+		Member member = memberService.findByEmail(email);
 		return "board/form";
 	}
 	
@@ -41,7 +41,7 @@ public class BoardController {
 	public String postAddBoard(@PathVariable String email, @ModelAttribute QuestionBoard questionBoard) {
 		
 		
-		Optional<Member> member = memberService.findByEmail(email);
+		Member member = memberService.findByEmail(email);
 		QuestionBoard saveQuestionBoard = questionBoardService.save(questionBoard);
 		return "board/form";
 	}

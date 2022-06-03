@@ -23,6 +23,7 @@ public class MyBatisConfig {
     private final MemberMapper memberMapper;
     private final QuestionBoardMapper questionBoardMapper;
 
+        
     @Bean
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());

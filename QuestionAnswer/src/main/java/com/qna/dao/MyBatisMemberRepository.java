@@ -30,7 +30,7 @@ public class MyBatisMemberRepository implements MemberRepository {
 	    }
 
 	    @Override
-	    public Optional<Member> findByEmail(String email) {
+	    public Member findByEmail(String email) {
 	        return memberMapper.findByEmail(email);
 	    }
 
@@ -40,7 +40,7 @@ public class MyBatisMemberRepository implements MemberRepository {
 	    }
 
 		@Override
-		public Optional<Member> findById(int id) {
+		public Member findById(int id) {
 			// TODO Auto-generated method stub
 			return memberMapper.findById(id);
 		}

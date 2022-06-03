@@ -12,9 +12,9 @@ public interface MemberRepository {
 
     void update(int id, MemberUpdateDto updateParam);
 
-    Optional<Member> findByEmail(String email);
+    Member findByEmail(String email);
     
-    Optional<Member> findById(int id);
+    Member findById(int id);
 
     List<Member> findAll();
 

@@ -28,11 +28,11 @@
         <div class="d-grid gap-12 d-sm-flex justify-content-sm-center">
         <button 
         	type="button" 
-        	class="btn btn-primary btn-lg px-4 gap-3" th:onclick="|location.href='@{/join/member}'|"
+        	class="btn btn-primary btn-lg px-4 gap-3" th:onclick="|location.href='@{/member/join}'|"
         	th:if=" ${session.login == null}">회원가입</button>
         <button 
         	type="button" 
-        	class="btn btn-outline-secondary btn-lg px-4" th:onclick="|location.href='@{/join/login}'|" 
+        	class="btn btn-outline-secondary btn-lg px-4" th:onclick="|location.href='@{/member/login}'|" 
         	style="margin-left:10px;" th:if=" ${session.login == null}" >로그인</button>
       </div>
     </main>

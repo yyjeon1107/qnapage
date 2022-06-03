@@ -18,14 +18,14 @@
 
 
 <select id="findByEmail" resultType="Member">
-	select id, email, name, password
+	select id, email, name, password, role
 	from member
 	where email=#{email}
 </select>
 
 
 <select id="findById" resultType="Member">
-	select id, email, name, password
+	select id, email, name, password, role
 	from member
 	where id=#{id}
 </select>

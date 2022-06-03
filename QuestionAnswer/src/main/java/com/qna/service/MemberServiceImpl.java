@@ -33,17 +33,17 @@ public class MemberServiceImpl implements MemberService{
 	    }
 
 	    @Override
-	    public Optional<Member> findByEmail(String email) {
+	    public Member findByEmail(String email) {
 	        return memberRepository.findByEmail(email);
 	    }
 
 	    @Override
-	    public List<Member> findItems() {
+	    public List<Member> findAll() {
 	        return memberRepository.findAll();
 	    }
 
 		@Override
-		public Optional<Member> findById(int id) {
+		public Member findById(int id) {
 			// TODO Auto-generated method stub
 			return memberRepository.findById(id);
 		}

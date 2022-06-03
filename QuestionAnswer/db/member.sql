@@ -5,3 +5,5 @@ email varchar(100) unique,
 name varchar(45),
 password varchar(45)
 );
+
+alter table member add role int(2);

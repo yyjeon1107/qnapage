@@ -30,24 +30,20 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link" th:if=" ${session.login == 'logined'} " th:href="@{/logout}" style="margin-left:1000px">로그아웃</a>
+                    <a class="nav-link" th:if=" ${session.login == 'logined'} " th:href="@{/member/logout}" style="margin-left:1000px">로그아웃</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:if=" ${session.login == 'logined'} " th:href="@{/board/list}" >게시판</a>
                 </li>
-            </ul>    
-            <ul  class="navbar-nav mr-auto" th:if=" ${session.login == 'logined'} "  th:switch="${session.memberType}" >
-                <th:block th:case="Admin">                 
-                    <li>
-                        <a href="/memberlist" >회원관리</a>
-                    </li>
-                </th:block>
-                <th:block th:case="Customer">               
-                    <li>
-                        <a th:href="@{'/customer/mypage/' + ${session.member.getId()} }" >마이페이지</a>
-                    </li>
-                </th:block>                
-                    
+              
+                <li class="nav-item">
+                    <a class="nav-link" th:if= "${session.login == 'logined'} and ${session.member.getRole() !=1} " th:href="@{/member/mypage/{email}}" >마이페이지</a>
+                </li>
+                 
+                <li class="nav-item">
+                    <a class="nav-link" th:if= "${session.login == 'logined'} and ${session.member.getRole()==1} " th:href="@{/member/memberlist}" >회원정보</a>
+                </li>
+            </ul>
         </div>
     </nav>
 
