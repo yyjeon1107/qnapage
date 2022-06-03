@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.qna.dto.MemberUpdateDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -106,18 +107,18 @@ public class MemberController {
 		
 		
 		//회원정보 수정
-//	    @GetMapping("/{id}/edit")
-//	    public String getMemberUpdate(@PathVariable int id, Model model) {
-//	        Member member = memberService.findById(id).get();
-//	        model.addAttribute("member", member);
-//	        return "editForm";
-//	    }
-//
-//	    @PostMapping("/{id}/edit")
-//	    public String postMemberUpdate(@PathVariable int id, @ModelAttribute MemberUpdateDto updateParam) {
-//	        itemService.update(itemId, updateParam);
-//	        return "redirect:/items/{itemId}";
-//	    }
+	    @GetMapping("/{id}/edit")
+	    public String getMemberUpdate(@PathVariable int id, Model model) {
+	        Member member = memberService.findById(id);
+	        model.addAttribute("member", member);
+	        return "/member/editmember";
+	    }
+
+	    @PostMapping("/{id}/edit")
+	    public String postMemberUpdate(@PathVariable int id, @ModelAttribute MemberUpdateDto updateParam) {
+			memberService.update(id, updateParam);
+	        return "redirect:/member/mypage";
+	    }
 		
 		
 		
