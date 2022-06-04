@@ -18,13 +18,12 @@ public class MyBatisQuestionBoardRepository implements QuestionBoardRepository {
 	
 	@Override
 	public QuestionBoard save(QuestionBoard questionBoard) {
-
 		questionBoardMapper.save(questionBoard);
 		return questionBoard;
 	}
 
 	@Override
-	public Optional<QuestionBoard> findById(int questionBoardId) {
+	public QuestionBoard findById(int questionBoardId) {
 		return questionBoardMapper.findById(questionBoardId);
 	}
 

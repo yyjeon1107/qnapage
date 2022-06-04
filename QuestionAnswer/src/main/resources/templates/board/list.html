@@ -45,7 +45,7 @@
               </tbody>
           </table>
           <div class="text-right">
-            <a type="button" class="btn btn-primary" th:href="@{/board/add/{email}}">쓰기</a>
+            <a type="button" class="btn btn-primary" th:href="@{/board/add/{id}(id = ${session.member.getId()})}">쓰기</a>
         </div>
         <!-- 
         <form th:action="@{'board/delete/board'}" method="post">

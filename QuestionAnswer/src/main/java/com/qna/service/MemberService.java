@@ -13,10 +13,12 @@ public interface MemberService {
 	  void update(int id, MemberUpdateDto updateParam);
 
 	  Member findByEmail(String email);
+	  
+	  Member findById(int id);
 
 	  List<Member> findAll();
 
-	  Member findById(int id);
+	  void delete(Member member);
 	
 	
 }

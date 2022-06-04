@@ -17,5 +17,7 @@ public interface MemberRepository {
     Member findById(int id);
 
     List<Member> findAll();
+    
+    void delete(Member member);
 
 }

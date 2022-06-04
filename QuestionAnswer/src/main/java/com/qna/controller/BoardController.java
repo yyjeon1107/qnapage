@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,19 +32,20 @@ public class BoardController {
 	private final MemberService memberService;
 	
 	//게시판 글 작성
-	@GetMapping("/add/{email}")
-	public String getAddBoard(@PathVariable String email) {
-		Member member = memberService.findByEmail(email);
+	@GetMapping("/add/{id}")
+	public String getAddBoard(@PathVariable("id") int id) {
+		Member member = memberService.findById(id);
 		return "board/form";
 	}
 	
-	@PostMapping("/add/{email}")
-	public String postAddBoard(@PathVariable String email, @ModelAttribute QuestionBoard questionBoard) {
+	@PostMapping("/add/{id}")
+	public String postAddBoard(@PathVariable("id") int id, @ModelAttribute QuestionBoard questionBoard) {
 		
-		
-		Member member = memberService.findByEmail(email);
+		Member member = memberService.findById(id);
+		String memberName = member.getName();
+		questionBoard.setMemberName(memberName);
 		QuestionBoard saveQuestionBoard = questionBoardService.save(questionBoard);
-		return "board/form";
+		return "redirect:/board/list";
 	}
 	
 	

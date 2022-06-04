@@ -24,7 +24,7 @@ public class QuestionBoardServiceImpl implements QuestionBoardService {
 	}
 
 	@Override
-	public Optional<QuestionBoard> findById(int questionBoardId) {
+	public QuestionBoard findById(int questionBoardId) {
 		// TODO Auto-generated method stub
 		return questionBoardRepository.findById(questionBoardId);
 	}

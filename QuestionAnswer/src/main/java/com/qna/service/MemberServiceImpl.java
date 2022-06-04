@@ -48,6 +48,13 @@ public class MemberServiceImpl implements MemberService{
 			return memberRepository.findById(id);
 		}
 
+	
+		@Override
+		public void delete(Member member) {
+			// TODO Auto-generated method stub
+			memberRepository.delete(member);
+		}
+
 		
 	
 }

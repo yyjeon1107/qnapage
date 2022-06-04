@@ -19,27 +19,25 @@
      
     </nav>
 
-    <div class="container">
+    <div class="container" th:each="member: ${member}">
         <h2>마이페이지</h2>
         <table class="table table-striped">
             <thead>
-              <tr>
-              	
+              <tr>              	
                 <th scope="col">이름</th>
-                <th scope="col">이메일</th>
-                
+                <th scope="col">이메일</th>                
               </tr>
             </thead>
             <tbody>
-              <tr>       
-                <td><a th:text="${session.member.getName()}">Otto</a></td>                     
-                <td th:text="${session.member.getEmail()}">Otto</td>   
+              <tr >       
+                <td th:value="${member.name}" th:text="${member.name}"></td>                     
+                <td th:value="${member.email}" th:text="${member.email}"></td>   
               </tr>
-              </tbody>
-          </table>
+            </tbody>
+        </table>
           <div class="text-right">
-            <a type="button" class="btn btn-primary" th:href="@{/member/{id}/edit}">회원정보 수정</a>
-        </div>
+            <a class="btn btn-primary" th:href="@{/member/edit/{id}(id = ${member.getId()})}">회원정보 수정</a>
+          </div>
         <!-- 
         <form th:action="@{'board/delete/board'}" method="post">
         <input type="hidden" name="id" th:object="${board}" th:value="${board.id}"/>

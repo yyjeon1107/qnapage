@@ -29,6 +29,7 @@
                 <th scope="col">이름</th>
                 <th scope="col">비밀번호</th>
                 <th scope="col">이메일</th>
+                <th scope="col"></th>
                 
               </tr>
             </thead>
@@ -37,32 +38,14 @@
                 <td th:text="${member.getId()}">Mark</td>
                 <td><a th:text="${member.getName()}">Otto</a></td>
                 <td th:text="${member.getPassword()}">Otto</td>                
-                <td th:text="${member.getEmail()}">Otto</td>   
+                <td th:text="${member.getEmail()}">Otto</td>
+                <td><a type="button" class="btn btn-primary" th:href="@{/member/admin/delete/{id}(id = ${member.getId()})}">삭제</a></td>   
               </tr>
               </tbody>
-          </table>
-          <div class="text-right">
-            <a type="button" class="btn btn-primary" th:href="@{/board/form}">삭제</a>
-        </div>
-        <!-- 
-        <form th:action="@{'board/delete/board'}" method="post">
-        <input type="hidden" name="id" th:object="${board}" th:value="${board.id}"/>
-        <button>삭제</button>
-    </form>
-     -->
+          </table>  
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

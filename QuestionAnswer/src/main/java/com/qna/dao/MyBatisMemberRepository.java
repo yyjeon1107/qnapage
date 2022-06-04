@@ -44,5 +44,11 @@ public class MyBatisMemberRepository implements MemberRepository {
 			// TODO Auto-generated method stub
 			return memberMapper.findById(id);
 		}
+
+		@Override
+		public void delete(Member member) {
+			// TODO Auto-generated method stub
+			memberMapper.delete(member);
+		}
 	
 }

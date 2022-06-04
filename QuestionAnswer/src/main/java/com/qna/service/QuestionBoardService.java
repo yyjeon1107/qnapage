@@ -9,7 +9,7 @@ public interface QuestionBoardService {
 
 	QuestionBoard save(QuestionBoard questionBoard);
 
-	Optional<QuestionBoard> findById(int questionBoardId);
+	QuestionBoard findById(int questionBoardId);
 
 	List<QuestionBoard> findAll();
 	

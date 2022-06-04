@@ -13,4 +13,23 @@ public class BoardDto {
 	private String content;
 	
 	
+	public BoardDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public BoardDto(int questionBoardId, String memberName, String title, String content) {
+		super();
+		this.questionBoardId = questionBoardId;
+		this.memberName = memberName;
+		this.title = title;
+		this.content = content;
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -94,30 +94,29 @@ public class MemberController {
 
 		
 		//마이페이지(고객 로그인)
-		@GetMapping("/mypage/{email}")
-		public String myPage(@PathVariable String email, Model model) {
+		@GetMapping("/mypage/{id}")
+		public String myPage(@PathVariable("id") int id, Model model) {
 			
-			Member member = memberService.findByEmail(email);
-			model.addAttribute("member", member);
-			
-						
+			Member member = memberService.findById(id);
+			model.addAttribute("member", member);							
 			return "/member/mypage";
 		}
 		
 		
 		
 		//회원정보 수정
-	    @GetMapping("/{id}/edit")
-	    public String getMemberUpdate(@PathVariable int id, Model model) {
-	        Member member = memberService.findById(id);
-	        model.addAttribute("member", member);
+	    @GetMapping("/edit/{id}")
+	    public String getMemberUpdate(@PathVariable("id") int id, Model model) {
+	    	Member member = memberService.findById(id);
+	    	model.addAttribute("member", member);
 	        return "/member/editmember";
 	    }
 
-	    @PostMapping("/{id}/edit")
-	    public String postMemberUpdate(@PathVariable int id, @ModelAttribute MemberUpdateDto updateParam) {
-			memberService.update(id, updateParam);
-	        return "redirect:/member/mypage";
+	    @PostMapping("/edit/{id}")
+	    public String postMemberUpdate(@PathVariable("id") int id, @ModelAttribute MemberUpdateDto updateParam) {
+			
+	    	memberService.update(id, updateParam);	    	
+	        return "redirect:/member/mypage/{id}";
 	    }
 		
 		
@@ -125,16 +124,33 @@ public class MemberController {
 		//회원리스트보기(관리자 로그인)
 		@GetMapping("/memberlist")
 		public String adminMemberList(Model model) {
-			
 			List<Member> memberList = memberService.findAll();
 			model.addAttribute("memberList", memberList);
 			return "/member/memberlist";
 		}
 		
 		
-		//회원탈퇴
+		//회원탈퇴(고객 로그인)
+		@GetMapping("/delete/{id}")
+		public String deleteMember(@PathVariable("id") int id, HttpServletRequest request) {
+			HttpSession session = request.getSession();		
+			Member member = memberService.findById(id);
+			memberService.delete(member);
+			session.setAttribute("login", null); 
+	        session.setAttribute("member", null);
+	        session.setAttribute("message", "로그아웃");   
+			return "redirect:/";
+		}
 		
-		
-		
-
+		//회원탈퇴(관리자 로그인)
+		@GetMapping("/admin/delete/{id}")
+		public String deleteAdminMember(@PathVariable("id") int id, HttpServletRequest request) {
+			HttpSession session = request.getSession();		
+			Member member = memberService.findById(id);
+			memberService.delete(member);
+			session.setAttribute("login", null); 
+	        session.setAttribute("member", null);
+	        session.setAttribute("message", "로그아웃");   
+			return "redirect:/member/memberlist";
+		}
 }

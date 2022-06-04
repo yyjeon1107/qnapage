@@ -17,14 +17,14 @@
 </update>
 
 
-<select id="findByEmail" resultType="Member">
+<select id="findByEmail" resultType="Member" parameterType="String">
 	select id, email, name, password, role
 	from member
 	where email=#{email}
 </select>
 
 
-<select id="findById" resultType="Member">
+<select id="findById" resultType="Member" parameterType="int">
 	select id, email, name, password, role
 	from member
 	where id=#{id}
@@ -36,5 +36,9 @@
 	from member
 </select>
 
+
+<delete id="delete">
+	delete from member where id=#{id}
+</delete>
 
 </mapper>
