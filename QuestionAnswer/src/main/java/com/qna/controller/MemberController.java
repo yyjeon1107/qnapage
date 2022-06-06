@@ -113,8 +113,7 @@ public class MemberController {
 	    }
 
 	    @PostMapping("/edit/{id}")
-	    public String postMemberUpdate(@PathVariable("id") int id, @ModelAttribute MemberUpdateDto updateParam) {
-			
+	    public String postMemberUpdate(@PathVariable("id") int id, @ModelAttribute MemberUpdateDto updateParam) {			
 	    	memberService.update(id, updateParam);	    	
 	        return "redirect:/member/mypage/{id}";
 	    }

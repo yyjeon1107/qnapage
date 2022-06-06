@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.qna.domain.QuestionBoard;
+import com.qna.dto.BoardDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,6 +32,18 @@ public class MyBatisQuestionBoardRepository implements QuestionBoardRepository {
 	public List<QuestionBoard> findAll() {
 		// TODO Auto-generated method stub
 		return questionBoardMapper.findAll();
+	}
+
+	@Override
+	public void update(int id, BoardDto updateParam) {
+		// TODO Auto-generated method stub
+		questionBoardMapper.update(id, updateParam);
+	}
+
+	@Override
+	public void delete(QuestionBoard questionBoard) {
+		// TODO Auto-generated method stub
+		questionBoardMapper.delete(questionBoard);
 	}
 
 }

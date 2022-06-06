@@ -3,6 +3,7 @@ package com.qna.domain;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

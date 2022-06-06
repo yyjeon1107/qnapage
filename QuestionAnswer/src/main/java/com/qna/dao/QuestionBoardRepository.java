@@ -3,7 +3,10 @@ package com.qna.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.qna.domain.QuestionBoard;
+import com.qna.dto.BoardDto;
 
 public interface QuestionBoardRepository {
 
@@ -11,7 +14,11 @@ public interface QuestionBoardRepository {
 	
 	QuestionBoard findById(int questionBoardId);
 
+	void update(@Param("id") int id, @Param("updateParam") BoardDto updateParam);
+	
 	List<QuestionBoard> findAll();
+	
+	void delete(QuestionBoard questionBoard);
 
 	
 }

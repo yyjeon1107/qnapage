@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.qna.domain.Member;
 import com.qna.domain.QuestionBoard;
 import com.qna.dto.BoardDto;
+import com.qna.dto.MemberUpdateDto;
 import com.qna.service.MemberService;
 import com.qna.service.QuestionBoardService;
 
@@ -48,16 +49,40 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+		
+	//게시판 글 수정
+	@GetMapping("/edit/{questionBoardId}")
+	public String getEditBoard(@PathVariable("questionBoardId") int questionBoardId, Model model) {
+		QuestionBoard questionboard = questionBoardService.findById(questionBoardId);
+		System.out.println(questionBoardService.findById(questionBoardId));
+		model.addAttribute("questionboard", questionboard);
+		return "/board/editform";
+	}
+		
+	@PostMapping("/edit/{questionBoardId}")
+	public String postEditBoard(@PathVariable("questionBoardId") int questionBoardId, @ModelAttribute BoardDto updateParam){
+		questionBoardService.update(questionBoardId, updateParam);
+		return "redirect:/board/list";
+	}
 	
 	
+	
+	//게시판 글 리스트 조회
 	@GetMapping("/list")
-	public String board(Model model) {
-		
+	public String boardList(Model model) {		
 		List<QuestionBoard> questionBoardList= questionBoardService.findAll();
-		model.addAttribute("boards", questionBoardList);
-		
+		model.addAttribute("boards", questionBoardList);		
 		return "board/list";
 	}
 	
+	
+	//게시판 글 삭제	
+	@GetMapping("/delete/{questionBoardId}")
+	public String deleteBoard(@PathVariable("questionBoardId") int questionBoardId) {
+		QuestionBoard questionboard = questionBoardService.findById(questionBoardId);
+		questionBoardService.delete(questionboard);
+		System.out.println("삭제 성공");
+		return "redirect:/board/list";
+	}
 
 }

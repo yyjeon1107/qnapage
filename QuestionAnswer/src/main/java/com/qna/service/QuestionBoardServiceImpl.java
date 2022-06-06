@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.qna.dao.QuestionBoardRepository;
 import com.qna.domain.QuestionBoard;
+import com.qna.dto.BoardDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,6 +34,18 @@ public class QuestionBoardServiceImpl implements QuestionBoardService {
 	public List<QuestionBoard> findAll() {
 		// TODO Auto-generated method stub
 		return questionBoardRepository.findAll();
+	}
+
+	@Override
+	public void update(int id, BoardDto updateParam) {
+		// TODO Auto-generated method stub
+		questionBoardRepository.update(id, updateParam);
+	}
+
+	@Override
+	public void delete(QuestionBoard questionBoard) {
+		// TODO Auto-generated method stub
+		questionBoardRepository.delete(questionBoard);
 	}
 	
 	

@@ -9,3 +9,10 @@ body {
 .btn btn-outline-secondary btn-lg px-4{
 	margin-left : 10px;
 }
+
+
+#content{
+white-space: no-wrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
