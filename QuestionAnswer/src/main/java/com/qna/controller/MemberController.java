@@ -71,7 +71,6 @@ public class MemberController {
             	session.setAttribute("member", member);
                 session.setAttribute("message", "로그인 성공");
                 System.out.println("로그인 성공");
-                System.out.println(member.getRole());
                 return "/member/result";
 
             }else {

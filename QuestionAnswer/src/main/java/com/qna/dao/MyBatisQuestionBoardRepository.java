@@ -35,9 +35,9 @@ public class MyBatisQuestionBoardRepository implements QuestionBoardRepository {
 	}
 
 	@Override
-	public void update(int id, BoardDto updateParam) {
+	public void update(int questionBoardId, BoardDto updateParam) {
 		// TODO Auto-generated method stub
-		questionBoardMapper.update(id, updateParam);
+		questionBoardMapper.update(questionBoardId, updateParam);
 	}
 
 	@Override

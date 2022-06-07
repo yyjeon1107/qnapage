@@ -37,9 +37,9 @@ public class QuestionBoardServiceImpl implements QuestionBoardService {
 	}
 
 	@Override
-	public void update(int id, BoardDto updateParam) {
+	public void update(int questionBoardId, BoardDto updateParam) {
 		// TODO Auto-generated method stub
-		questionBoardRepository.update(id, updateParam);
+		questionBoardRepository.update(questionBoardId, updateParam);
 	}
 
 	@Override

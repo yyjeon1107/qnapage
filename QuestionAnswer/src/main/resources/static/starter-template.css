@@ -11,7 +11,7 @@ body {
 }
 
 
-#content{
+.textcontrol{
 white-space: no-wrap;
 overflow: hidden;
 text-overflow: ellipsis;

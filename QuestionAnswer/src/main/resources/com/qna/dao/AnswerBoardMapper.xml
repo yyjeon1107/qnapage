@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qna.dao.AnswerBoardMapper">
+
+<resultMap type="AnswerBoard"  id="ABoardMap">
+		<result property="answerBoardId" column="answer_board_id"/>
+		<result property="memberName" column="member_name"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="questionBoardId" column="question_board_id"/>
+		<result property="regDtime" column="reg_dtime"/>
+		<result property="modDtime" column="mod_dtime"/>
+</resultMap>
+
+<insert id="save" keyProperty="answer_board_id" parameterType="map">
+	insert into answerboard (title, member_name, content, question_board_id)
+	values (#{answerboard.title}, #{answerboard.memberName}, #{answerboard.content}, #{answerboard.questionBoardId})
+</insert>
+
+
+<select id="findById" resultType="AnswerBoard" parameterType="int">
+	select 
+		answer_board_id, 
+		member_name, 
+		title, 
+		content, 
+		reg_dtime, 
+		mod_dtime
+	from answerboard
+	where answer_board_id=#{answerBoardId}
+</select>
+
+
+<update id="update">
+	update answerboard
+	set title=#{updateParam.title},
+		content=#{updateParam.content}
+	where answer_board_id=#{answerBoardId}	
+</update>
+
+
+
+<select id="findAll" resultType="AnswerBoard">
+	select 
+		answer_board_id, 
+		member_name, title, 
+		content, 
+		reg_dtime, 
+		mod_dtime 
+	from 
+		answerboard
+	where question_board_id=#{questionBoardId}	
+	
+</select>
+
+
+
+
+<delete id="delete">
+	delete from answerboard where answer_board_id=#{answerBoardId}
+</delete>
+
+
+</mapper>

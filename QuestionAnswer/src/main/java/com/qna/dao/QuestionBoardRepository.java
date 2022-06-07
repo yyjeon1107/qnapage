@@ -14,7 +14,7 @@ public interface QuestionBoardRepository {
 	
 	QuestionBoard findById(int questionBoardId);
 
-	void update(@Param("id") int id, @Param("updateParam") BoardDto updateParam);
+	void update(@Param("questionBoardId") int id, @Param("updateParam") BoardDto updateParam);
 	
 	List<QuestionBoard> findAll();
 	

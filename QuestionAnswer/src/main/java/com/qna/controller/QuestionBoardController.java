@@ -1,10 +1,6 @@
 package com.qna.controller;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.qna.domain.Member;
 import com.qna.domain.QuestionBoard;
 import com.qna.dto.BoardDto;
-import com.qna.dto.MemberUpdateDto;
 import com.qna.service.MemberService;
 import com.qna.service.QuestionBoardService;
 
@@ -26,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
-public class BoardController {
+public class QuestionBoardController {
 
 	
 	private final QuestionBoardService questionBoardService;
@@ -54,7 +49,6 @@ public class BoardController {
 	@GetMapping("/edit/{questionBoardId}")
 	public String getEditBoard(@PathVariable("questionBoardId") int questionBoardId, Model model) {
 		QuestionBoard questionboard = questionBoardService.findById(questionBoardId);
-		System.out.println(questionBoardService.findById(questionBoardId));
 		model.addAttribute("questionboard", questionboard);
 		return "/board/editform";
 	}

@@ -12,7 +12,7 @@ public interface QuestionBoardService {
 
 	QuestionBoard findById(int questionBoardId);
 	
-	void update(int id, BoardDto updateParam);
+	void update(int questionBoardId, BoardDto updateParam);
 
 	List<QuestionBoard> findAll();
 

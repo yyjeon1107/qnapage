@@ -21,26 +21,26 @@
 
     <div class="container">
         <h2>게시판</h2>
-		<form action="#" th:action="@{/board/edit/{questionBoardId}(questionBoardId = ${questionboard.getQuestionBoardId()})}" method="post">
+		<form action="#" th:action="@{/answer/add/{questionBoardId}(questionBoardId=${questionBoard.getQuestionBoardId()})}" method="post">
 		<div class="mb-3">
-		  <label for="title" class="form-label">제목</label>
-		  <input type="text" name="title" th:value="${questionboard.title}">
+		  <label for="title" class="form-label">질문글 제목</label>
+		  <input type="text" name="title" >
 		</div>
 		
 		<div class="mb-3">
 		  <label for="name" class="form-label">작성자</label>
-		  <input type="hidden" style="border:0px;" name="memberName" th:value="${session.member.getName()}"  th:text="${session.member.getName()}"  readonly>
+		  <input type="text" style="border:0px;" name="memberName" th:value="${session.member.getName()}"   readonly>
 		</div>
 		
 		<div class="mb-3">
-		  <label for="content" class="form-label">내용</label>
-		  <input style="height:300px; word-wrap:break-word;" type="textarea"  class="form-control" id="content" rows="3" name="content" th:value="${questionboard.content}">
+		  <label for="content" class="form-label">답변 내용</label>
+		  <input style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" class="form-control" id="content" rows="3" name="content">
 		</div>		
 		
 		
 		<div class="text-right">
-            <button type="submit" class="btn btn-primary" th:onclick="|location.href='@{/board/list}'|">확인</button>
-            <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/board/list}'|">취소</button>
+            <button type="submit" class="btn btn-primary">확인</button>
+            <button type="button" class="btn btn-primary" th:href="@{/board/list}">취소</button>
         </div>			
 		</form>       
        

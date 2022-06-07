@@ -33,7 +33,7 @@
 <update id="update">
 	update questionboard
 	set title=#{updateParam.title},
-		content=#{updateParam.content},
+		content=#{updateParam.content}
 	where question_board_id=#{questionBoardId}	
 </update>
 

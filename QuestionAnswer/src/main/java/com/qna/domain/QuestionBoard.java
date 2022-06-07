@@ -23,8 +23,7 @@ public class QuestionBoard {
 	private String memberName;
 	private String title;
 	private String content;
-	private int answerBoardId;
-	//List <AnswerBoard> answerBoardList; //1:N 관계
+
 	
 	//등록일자
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -39,17 +38,18 @@ public class QuestionBoard {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QuestionBoard(int questionBoardId, String memberName, String title, String content, int answerBoardId,
-			LocalDateTime regDtime, LocalDateTime modDtime) {
+	public QuestionBoard(int questionBoardId, String memberName, String title, String content, LocalDateTime regDtime,
+			LocalDateTime modDtime) {
 		super();
 		this.questionBoardId = questionBoardId;
 		this.memberName = memberName;
 		this.title = title;
 		this.content = content;
-		this.answerBoardId = answerBoardId;
 		RegDtime = regDtime;
 		ModDtime = modDtime;
 	}
+
+	
 
 	
 

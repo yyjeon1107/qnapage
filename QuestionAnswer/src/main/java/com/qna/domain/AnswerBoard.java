@@ -17,6 +17,7 @@ public class AnswerBoard {
 	private String memberName;
 	private String title;
 	private String content;
+	private int questionBoardId;
 	
 	
 	//등록일자
