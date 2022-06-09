@@ -23,7 +23,8 @@
 		answer_board_id, 
 		member_name, 
 		title, 
-		content, 
+		content,
+		question_board_id, 
 		reg_dtime, 
 		mod_dtime
 	from answerboard
@@ -40,7 +41,7 @@
 
 
 
-<select id="findAll" resultType="AnswerBoard">
+<select id="findAll" resultType="AnswerBoard" parameterType="AnswerBoard">
 	select 
 		answer_board_id, 
 		member_name, title, 

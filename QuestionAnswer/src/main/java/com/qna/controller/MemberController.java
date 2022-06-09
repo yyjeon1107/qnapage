@@ -40,16 +40,22 @@ public class MemberController {
 	    public String joinMember(HttpServletRequest request, @ModelAttribute Member member) {
 	        
 	    	HttpSession session = request.getSession();
-	    	
-	    	Member joinedMember = memberService.join(member);
-	    	if(joinedMember != null) {
+	    	try {
+	    		Member joinedMember = memberService.join(member);
 	    		session.setAttribute("message", "회원가입 성공");
 	    		return "redirect:/";
-	    	}else {
+	    	}catch(IllegalStateException e) {
 	    		session.setAttribute("message", "회원가입 실패");
 				return "redirect:/member/joinmembers";
-
 	    	}
+//	    	Member joinedMember = memberService.join(member);
+//	    	if(joinedMember != null) {
+//	    		session.setAttribute("message", "회원가입 성공");
+//	    		return "redirect:/";
+//	    	}else{
+//	    		session.setAttribute("message", "회원가입 실패");
+//				return "redirect:/member/joinmembers";
+//	    	}
 	    
 	    }
 	    
@@ -75,6 +81,7 @@ public class MemberController {
 
             }else {
                 System.out.println("로그인 실패");
+                session.setAttribute("message", "비밀번호 또는 이메일이 올바르지 않습니다");
             	return "redirect:/member/login";
             }
 		}

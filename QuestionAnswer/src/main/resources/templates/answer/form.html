@@ -21,9 +21,9 @@
 
     <div class="container">
         <h2>게시판</h2>
-		<form action="#" th:action="@{/answer/add/{questionBoardId}(questionBoardId=${questionBoard.getQuestionBoardId()})}" method="post">
+		<form action="#" th:action="@{/answer/add/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}" method="post">
 		<div class="mb-3">
-		  <label for="title" class="form-label">질문글 제목</label>
+		  <label for="title" class="form-label">답변 제목</label>
 		  <input type="text" name="title" >
 		</div>
 		
@@ -40,7 +40,7 @@
 		
 		<div class="text-right">
             <button type="submit" class="btn btn-primary">확인</button>
-            <button type="button" class="btn btn-primary" th:href="@{/board/list}">취소</button>
+            <button type="button" class="btn btn-primary"  th:onclick="|location.href='@{/board/list}'|">취소</button>
         </div>			
 		</form>       
        

@@ -21,26 +21,26 @@
 
     <div class="container">
         <h2>게시판</h2>
-		<form action="#" th:action="@{/board/add/{id}(id = ${session.member.getId()})}" method="post">
+		<form action="#" th:action="@{/board/view/{questionBoardId}(questionBoardId = ${questionboard.getQuestionBoardId()})}" method="post">
 		<div class="mb-3">
 		  <label for="title" class="form-label">제목</label>
-		  <input type="text" name="title">
+		  <input type="hidden" name="title" th:value="${questionboard.title}" th:text="${questionboard.title}">
 		</div>
 		
 		<div class="mb-3">
 		  <label for="name" class="form-label">작성자</label>
-		  <input type="text" style="border:0px;" name="memberName" th:value="${session.member.getName()}"   readonly>
+		  <input type="hidden" style="border:0px;" name="memberName" th:value="${session.member.getName()}"  th:text="${session.member.getName()}"  readonly>
 		</div>
 		
 		<div class="mb-3">
 		  <label for="content" class="form-label">내용</label>
-		  <input type="textarea" class="form-control" id="content" rows="3" name="content">
+		  <input style="height:300px; word-wrap:break-word;" type="hidden"  class="form-control" 
+		  id="content" rows="3" name="content" th:value="${questionboard.content}" th:text="${questionboard.content}">
 		</div>		
 		
 		
 		<div class="text-right">
-            <button type="submit" class="btn btn-primary">확인</button>
-            <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/board/list}'|">취소</button>
+            <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/board/list}'|">뒤로가기</button>
         </div>			
 		</form>       
        

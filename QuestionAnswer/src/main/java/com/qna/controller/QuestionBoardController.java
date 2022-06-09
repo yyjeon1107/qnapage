@@ -1,5 +1,6 @@
 package com.qna.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -49,17 +50,27 @@ public class QuestionBoardController {
 	@GetMapping("/edit/{questionBoardId}")
 	public String getEditBoard(@PathVariable("questionBoardId") int questionBoardId, Model model) {
 		QuestionBoard questionboard = questionBoardService.findById(questionBoardId);
+//		questionboard.setModDtime(LocalDateTime.now());
 		model.addAttribute("questionboard", questionboard);
 		return "/board/editform";
 	}
 		
 	@PostMapping("/edit/{questionBoardId}")
 	public String postEditBoard(@PathVariable("questionBoardId") int questionBoardId, @ModelAttribute BoardDto updateParam){
+		QuestionBoard questionboard = questionBoardService.findById(questionBoardId);
 		questionBoardService.update(questionBoardId, updateParam);
+
 		return "redirect:/board/list";
 	}
 	
 	
+	//게시판 글 보기
+	@GetMapping("/view/{questionBoardId}")
+	public String viewBoard(@PathVariable("questionBoardId") int questionBoardId, Model model) {
+		QuestionBoard questionboard = questionBoardService.findById(questionBoardId);
+		model.addAttribute("questionboard", questionboard);
+		return "/board/viewform";
+	}
 	
 	//게시판 글 리스트 조회
 	@GetMapping("/list")

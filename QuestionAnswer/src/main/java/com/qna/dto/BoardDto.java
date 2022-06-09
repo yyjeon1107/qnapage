@@ -1,5 +1,11 @@
 package com.qna.dto;
 
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.LastModifiedDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,10 +13,14 @@ import lombok.Setter;
 @Setter
 public class BoardDto {
 
+	
 	private int questionBoardId;
 	private String memberName;
 	private String title;
 	private String content;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	@LastModifiedDate
+    private LocalDateTime ModDtime;
 	
 	
 	public BoardDto() {
@@ -19,13 +29,16 @@ public class BoardDto {
 	}
 
 
-	public BoardDto(int questionBoardId, String memberName, String title, String content) {
+	public BoardDto(int questionBoardId, String memberName, String title, String content, LocalDateTime modDtime) {
 		super();
 		this.questionBoardId = questionBoardId;
 		this.memberName = memberName;
 		this.title = title;
 		this.content = content;
+		ModDtime = modDtime;
 	}
+
+
 	
 	
 	

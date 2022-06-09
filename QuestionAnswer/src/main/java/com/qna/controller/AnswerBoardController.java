@@ -32,54 +32,66 @@ public class AnswerBoardController {
 	@GetMapping("/add/{questionBoardId}")
 	public String getAddBoard(@PathVariable("questionBoardId") int questionBoardId, Model model) {
 		QuestionBoard questionBoard = questionBoardService.findById(questionBoardId);
-		System.out.println(questionBoard.getQuestionBoardId());
-		model.addAttribute("questionBoard", questionBoard);
+		model.addAttribute("board", questionBoard);
 		return "answer/form";
 	}
 	
 	@PostMapping("/add/{questionBoardId}")
 	public String postAddBoard(@PathVariable("questionBoardId") int questionBoardId, @ModelAttribute AnswerBoard answerBoard) {
-		
-	
-		QuestionBoard questionBoard = questionBoardService.findById(questionBoardId);
-		questionBoard.getMemberName();
+//		QuestionBoard questionBoard = questionBoardService.findById(questionBoardId);
+
 		answerBoard.setQuestionBoardId(questionBoardId);
 		AnswerBoard saveAnswerBoard = answerBoardService.save(answerBoard);
-		return "redirect:/board/list";
+		return "redirect:/answer/list/{questionBoardId}";
 	}
 	
 		
 	//게시판 글 수정
-	@GetMapping("/edit/{answerBoardId}")
-	public String getEditBoard(@PathVariable("answerBoardId") int answerBoardId, Model model) {
+	@GetMapping("/edit/{questionBoardId}/{answerBoardId}")
+	public String getEditBoard(@PathVariable("questionBoardId") int questionBoardId, @PathVariable("answerBoardId") int answerBoardId, Model model) {
+		List<AnswerBoard> answerBoardList = answerBoardService.findAll(questionBoardId);
 		AnswerBoard answerBoard = answerBoardService.findById(answerBoardId);
-		model.addAttribute("answerBoard", answerBoard);
+		model.addAttribute("board", answerBoard);
 		return "/answer/editform";
 	}
 		
-	@PostMapping("/edit/{answerBoardId}")
-	public String postEditBoard(@PathVariable("answerBoardId") int answerBoardId, @ModelAttribute BoardDto updateParam){
+	@PostMapping("/edit/{questionBoardId}/{answerBoardId}")
+	public String postEditBoard(@PathVariable("questionBoardId") int questionBoardId, @PathVariable("answerBoardId") int answerBoardId, @ModelAttribute BoardDto updateParam){
+		List<AnswerBoard> answerBoardList = answerBoardService.findAll(questionBoardId);
+		AnswerBoard answerBoard = answerBoardService.findById(answerBoardId);
 		answerBoardService.update(answerBoardId, updateParam);
-		return "redirect:/answer/list";
+		return "redirect:/answer/list/{questionBoardId}";
 	}
 	
+	
+	//게시판 글 보기
+	@GetMapping("/view/{questionBoardId}/{answerBoardId}")
+	public String viewBoard(@PathVariable("questionBoardId") int questionBoardId, @PathVariable("answerBoardId") int answerBoardId, Model model) {
+		AnswerBoard answerBoard = answerBoardService.findById(answerBoardId);
+		model.addAttribute("board", answerBoard);	
+		return "/answer/viewform";
+	}
 	
 	
 	//게시판 글 리스트 조회
 	@GetMapping("/list/{questionBoardId}")
 	public String boardList(@PathVariable("questionBoardId") int questionBoardId, Model model) {
-		List<AnswerBoard> answerBoardList= answerBoardService.findAll(questionBoardId);		
-		model.addAttribute("boards", answerBoardList);		
-		return "answer/list";
+		
+			List<AnswerBoard> answerBoardList= answerBoardService.findAll(questionBoardId);
+			model.addAttribute("boards", answerBoardList);
+			return "answer/list";
+		
+		
 	}
 	
 	
 	//게시판 글 삭제	
-	@GetMapping("/delete/{answerBoardId}")
-	public String deleteBoard(@PathVariable("answerBoardId") int answerBoardId) {
+	@GetMapping("/delete/{questionBoardId}/{answerBoardId}")
+	public String deleteBoard(@PathVariable("questionBoardId") int questionBoardId, @PathVariable("answerBoardId") int answerBoardId) {
 		AnswerBoard answerBoard = answerBoardService.findById(answerBoardId);
+		List<AnswerBoard> answerBoardList = answerBoardService.findAll(questionBoardId);
 		answerBoardService.delete(answerBoard);
-		return "redirect:/answer/list";
+		return "redirect:/answer/list/{questionBoardId}";
 	}
 
 }

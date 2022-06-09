@@ -31,7 +31,7 @@
                 <th scope="col">제목</th>
                 <th scope="col">내용</th>
                 <th scope="col">등록일</th>
-                <th scope="col">수정일</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>      
               </tr>
@@ -41,10 +41,15 @@
               	
                 <td th:text="${board.questionBoardId}"/>
                 <td  th:value="${board.memberName}" th:text="${board.memberName}"></td>
-                <td><a type="button" th:text="${board.title}" th:href="@{/board/edit/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}" /></td>
+                <td><a type="button" th:text="${board.title}" th:href="@{/board/view/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}" /></td>
                 <td><p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;  width: 100px;  height: 20px;" th:text="${board.content}"></p></td>
                 <td th:text="${board.regDtime}"/>
-                <td th:text="${board.modDtime}"/>                
+                <td>
+                	<a type="button" class="btn btn-primary" 
+                	th:if="${board.memberName.equals(session.member.getName())}"
+                	th:href="@{/board/edit/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">수정</a>
+                	
+                </td>                
                 <td>
                 	<a type="button" class="btn btn-primary" 
                 	th:if="${board.memberName.equals(session.member.getName())}"
@@ -52,11 +57,11 @@
                 	
                 	<a type="button" class="btn btn-primary" style="background-color:#ff7070; border-color:#ff7070;"
                 	th:unless="${board.memberName.equals(session.member.getName())}"
-                	th:href="@{/answer/add/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">답변달기</a>
+                	th:href="@{/answer/add/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">답변<br>달기</a>
                 </td>
       
                 <td>
-                	<a type="button" class="btn btn-primary" th:href="@{/answer/list/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">답변보기</a>
+                	<a type="button" class="btn btn-primary" th:href="@{/answer/list/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">답변<br>보기</a>
                 </td>
               </div>                 
                 
