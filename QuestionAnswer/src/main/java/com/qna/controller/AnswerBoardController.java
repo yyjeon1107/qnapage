@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.qna.domain.AnswerBoard;
 import com.qna.domain.QuestionBoard;
 import com.qna.dto.BoardDto;
+import com.qna.dto.SelectedDto;
 import com.qna.service.AnswerBoardService;
 import com.qna.service.MemberService;
 import com.qna.service.QuestionBoardService;
@@ -26,7 +27,6 @@ public class AnswerBoardController {
 
 	private final AnswerBoardService answerBoardService;
 	private final QuestionBoardService questionBoardService;
-	private final MemberService memberService;
 	
 	//게시판 글 작성
 	@GetMapping("/add/{questionBoardId}")
@@ -38,8 +38,6 @@ public class AnswerBoardController {
 	
 	@PostMapping("/add/{questionBoardId}")
 	public String postAddBoard(@PathVariable("questionBoardId") int questionBoardId, @ModelAttribute AnswerBoard answerBoard) {
-//		QuestionBoard questionBoard = questionBoardService.findById(questionBoardId);
-
 		answerBoard.setQuestionBoardId(questionBoardId);
 		AnswerBoard saveAnswerBoard = answerBoardService.save(answerBoard);
 		return "redirect:/answer/list/{questionBoardId}";
@@ -75,13 +73,10 @@ public class AnswerBoardController {
 	
 	//게시판 글 리스트 조회
 	@GetMapping("/list/{questionBoardId}")
-	public String boardList(@PathVariable("questionBoardId") int questionBoardId, Model model) {
-		
-			List<AnswerBoard> answerBoardList= answerBoardService.findAll(questionBoardId);
-			model.addAttribute("boards", answerBoardList);
-			return "answer/list";
-		
-		
+	public String boardList(@PathVariable("questionBoardId") int questionBoardId, Model model) {		
+		List<AnswerBoard> answerBoardList= answerBoardService.findAll(questionBoardId);
+		model.addAttribute("boards", answerBoardList);
+		return "/answer/list";		
 	}
 	
 	
@@ -89,9 +84,34 @@ public class AnswerBoardController {
 	@GetMapping("/delete/{questionBoardId}/{answerBoardId}")
 	public String deleteBoard(@PathVariable("questionBoardId") int questionBoardId, @PathVariable("answerBoardId") int answerBoardId) {
 		AnswerBoard answerBoard = answerBoardService.findById(answerBoardId);
-		List<AnswerBoard> answerBoardList = answerBoardService.findAll(questionBoardId);
-		answerBoardService.delete(answerBoard);
-		return "redirect:/answer/list/{questionBoardId}";
+		answerBoardService.delete(answerBoard);		
+	
+		return "redirect:/board/list";
 	}
 
+//	//게시판 글 채택
+//	@GetMapping("/select/{questionBoardId}/{answerBoardId}")
+//	public String selectBoard(@PathVariable("questionBoardId") int questionBoardId, @PathVariable("answerBoardId") int answerBoardId, @ModelAttribute SelectedDto updateSelectParam) {
+//		
+//		AnswerBoard answerBoard = answerBoardService.findById(answerBoardId);		
+//		answerBoard.setSelected(1);
+//		answerBoardService.updateSelect(answerBoardId, updateSelectParam);
+//		System.out.println("===================");
+//		System.out.println(answerBoard);
+//		System.out.println("===================");
+//		return "redirect:/board/list";
+//	}
+
+//	//게시판 글 채택 취소
+//	@GetMapping("/no/select/{questionBoardId}/{answerBoardId}")
+//	public String noSelectBoard(@PathVariable("questionBoardId") int questionBoardId, @PathVariable("answerBoardId") int answerBoardId, @ModelAttribute BoardDto updateParam) {
+//		
+//		AnswerBoard answerBoard = answerBoardService.findById(answerBoardId);
+//		answerBoard.setSelected(0);
+//		answerBoardService.updateSelect(answerBoardId, updateParam);		
+//
+//		return "redirect:/board/list";
+//	}
+//
+//	
 }

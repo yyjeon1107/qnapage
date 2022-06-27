@@ -9,6 +9,7 @@ import com.qna.dao.QuestionBoardRepository;
 import com.qna.domain.AnswerBoard;
 import com.qna.domain.QuestionBoard;
 import com.qna.dto.BoardDto;
+import com.qna.dto.SelectedDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,6 +47,12 @@ public class AnswerBoardServiceImpl implements AnswerBoardService {
 	public void delete(AnswerBoard answerBoard) {
 		// TODO Auto-generated method stub
 		answerBoardRepository.delete(answerBoard);
+	}
+
+	@Override
+	public void updateSelect(int answerBoardId, SelectedDto updateSelectParam) {
+		// TODO Auto-generated method stub
+		answerBoardRepository.updateSelect(answerBoardId, updateSelectParam);
 	}
 
 }

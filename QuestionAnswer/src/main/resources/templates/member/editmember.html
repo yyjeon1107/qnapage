@@ -45,6 +45,12 @@
 	        <button 
 	        	type="submit" 
 	        	class="btn btn-primary btn-lg px-4 gap-3" th:onclick="|location.href='@{/member/mypage/{id}(id = ${member.getId()})}'|">수정</button>
+	        
+	        <button 
+	        	type="button" 
+	        	class="btn btn-outline-secondary btn-lg px-4" th:onclick="|location.href='@{/member/mypage/{id}(id = ${session.member.getId()})}'|" 
+	        	style="margin-left:10px;">취소</button>
+	        
 	        <button 
 	        	type="button" 
 	        	class="btn btn-outline-secondary btn-lg px-4" th:onclick="|location.href='@{/member/delete/{id}(id = ${member.getId()})}'|" 

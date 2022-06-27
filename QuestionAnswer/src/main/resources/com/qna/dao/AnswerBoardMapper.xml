@@ -13,8 +13,8 @@
 </resultMap>
 
 <insert id="save" keyProperty="answer_board_id" parameterType="map">
-	insert into answerboard (title, member_name, content, question_board_id)
-	values (#{answerboard.title}, #{answerboard.memberName}, #{answerboard.content}, #{answerboard.questionBoardId})
+	insert into answerboard (title, member_name, content, question_board_id, selected)
+	values (#{answerboard.title}, #{answerboard.memberName}, #{answerboard.content}, #{answerboard.questionBoardId}, #{answerboard.selected})
 </insert>
 
 
@@ -39,7 +39,11 @@
 	where answer_board_id=#{answerBoardId}	
 </update>
 
-
+<update id="updateSelect">
+	update answerboard
+	set selected=#{updateSelectParam.selected}
+	where answer_board_id=#{answerBoardId}	
+</update>
 
 <select id="findAll" resultType="AnswerBoard" parameterType="AnswerBoard">
 	select 
@@ -53,9 +57,6 @@
 	where question_board_id=#{questionBoardId}	
 	
 </select>
-
-
-
 
 <delete id="delete">
 	delete from answerboard where answer_board_id=#{answerBoardId}

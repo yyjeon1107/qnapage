@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.qna.domain.AnswerBoard;
 import com.qna.domain.QuestionBoard;
 import com.qna.dto.BoardDto;
+import com.qna.dto.SelectedDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,6 +46,12 @@ public class MyBatisAnswerBoardRepository implements AnswerBoardRepository {
 	public void delete(AnswerBoard answerBoard) {
 		// TODO Auto-generated method stub
 		answerBoardMapper.delete(answerBoard);
+	}
+
+	@Override
+	public void updateSelect(int answerBoardId, SelectedDto updateSelectParam) {
+		// TODO Auto-generated method stub
+		answerBoardMapper.updateSelect(answerBoardId, updateSelectParam);
 	}
 
 }

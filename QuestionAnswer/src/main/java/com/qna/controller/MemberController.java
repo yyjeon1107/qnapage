@@ -48,14 +48,7 @@ public class MemberController {
 	    		session.setAttribute("message", "회원가입 실패");
 				return "redirect:/member/joinmembers";
 	    	}
-//	    	Member joinedMember = memberService.join(member);
-//	    	if(joinedMember != null) {
-//	    		session.setAttribute("message", "회원가입 성공");
-//	    		return "redirect:/";
-//	    	}else{
-//	    		session.setAttribute("message", "회원가입 실패");
-//				return "redirect:/member/joinmembers";
-//	    	}
+
 	    
 	    }
 	    

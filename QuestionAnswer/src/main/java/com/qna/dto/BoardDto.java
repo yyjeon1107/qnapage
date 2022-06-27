@@ -19,8 +19,9 @@ public class BoardDto {
 	private String title;
 	private String content;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-	@LastModifiedDate
     private LocalDateTime ModDtime;
+	private int anserBoardId;
+	private int selected;
 	
 	
 	public BoardDto() {
@@ -29,13 +30,16 @@ public class BoardDto {
 	}
 
 
-	public BoardDto(int questionBoardId, String memberName, String title, String content, LocalDateTime modDtime) {
+	public BoardDto(int questionBoardId, String memberName, String title, String content, LocalDateTime modDtime,
+			int anserBoardId, int selected) {
 		super();
 		this.questionBoardId = questionBoardId;
 		this.memberName = memberName;
 		this.title = title;
 		this.content = content;
 		ModDtime = modDtime;
+		this.anserBoardId = anserBoardId;
+		this.selected = selected;
 	}
 
 

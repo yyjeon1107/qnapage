@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.qna.domain.AnswerBoard;
 import com.qna.dto.BoardDto;
+import com.qna.dto.SelectedDto;
 
 @Mapper
 public interface AnswerBoardMapper {
@@ -17,8 +18,12 @@ public interface AnswerBoardMapper {
 	
 	void update(@Param("answerBoardId") int answerBoardId, @Param("updateParam") BoardDto updateParam);
 	
+	void updateSelect(@Param("answerBoardId") int answerBoardId, @Param("updateSelectParam") SelectedDto updateSelectParam);
+	
 	List<AnswerBoard> findAll(int questionBoardId);
 	
 	void delete(AnswerBoard answerBoard);
+
+	
 	
 }

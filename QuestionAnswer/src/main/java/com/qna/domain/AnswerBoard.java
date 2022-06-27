@@ -29,4 +29,6 @@ public class AnswerBoard {
     private LocalDateTime ModDtime;
 
 	
+	private int selected;
+	
 }

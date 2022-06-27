@@ -23,8 +23,7 @@
         <h2>게시판</h2>
         <div>총 건수 : <span th:text="${#lists.size(boards)}"></span></div>
         <table class="table table-striped">
-        <div th:each="board : ${boards}">
-            <thead>
+        <thead>
               <tr>
                 <th scope="col">번호</th>
                 <th scope="col">작성자</th>
@@ -37,7 +36,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+            
+            
+              <tr th:each="board : ${boards}">
               	
                 <td th:text="${board.questionBoardId}"/>
                 <td  th:value="${board.memberName}" th:text="${board.memberName}"></td>
@@ -46,14 +47,14 @@
                 <td th:text="${board.regDtime}"/>
                 <td>
                 	<a type="button" class="btn btn-primary" 
-                	th:if="${board.memberName.equals(session.member.getName())}"
-                	th:href="@{/board/edit/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">수정</a>
+                	th:if="${board.memberName.equals(session.member.getName())}" 
+                	th:href="@{/board/edit/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">수정<br>하기</a>
                 	
                 </td>                
                 <td>
                 	<a type="button" class="btn btn-primary" 
-                	th:if="${board.memberName.equals(session.member.getName())}"
-                	th:href="@{/board/delete/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">삭제</a>
+                	th:if="${board.memberName.equals(session.member.getName())} or ${session.member.getRole()==1}"
+                	th:href="@{/board/delete/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">삭제<br>하기</a>
                 	
                 	<a type="button" class="btn btn-primary" style="background-color:#ff7070; border-color:#ff7070;"
                 	th:unless="${board.memberName.equals(session.member.getName())}"
@@ -63,10 +64,11 @@
                 <td>
                 	<a type="button" class="btn btn-primary" th:href="@{/answer/list/{questionBoardId}(questionBoardId=${board.getQuestionBoardId()})}">답변<br>보기</a>
                 </td>
-              </div>                 
+                               
                 
               </tr>
             </tbody>
+            
           </table>
           
           <div class="text-right">
